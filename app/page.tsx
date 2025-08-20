@@ -1,102 +1,326 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Github, Mail, MapPin, Phone, Download, Link as LinkIcon } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+const RESUME_URL = "/Michael-Resume.pdf"; // place file in /public
+
+const skills: Record<string, string[]> = {
+  Frontend: ["JavaScript (ES6+)", "TypeScript", "React", "React Native", "Redux", "HTML5", "CSS3", "Tailwind CSS", "Expo", "Jest", "RTL"],
+  Backend: ["Node.js", "Express", "GraphQL", "ASP.NET Core", "Java EE"],
+  Database: ["PostgreSQL", "MongoDB", "MSSQL"],
+  Tools: ["Git", "AWS", "Jira", "SourceTree", "ESLint", "Figma"],
+};
+
+const projects = [
+  { name: "DataPeak AI", summary: "SaaS tool that transforms data into clear insights with streamlined dashboards and sharing.", tags: ["SaaS", "Data", "React", "Node"], href: "#" },
+  { name: "Linkify AI", summary: "Automated LinkedIn lead-generation system with scheduling and analytics.", tags: ["Automation", "React", "Node"], href: "#" },
+  { name: "Enovis CapEx", summary: "Multilingual capital expenditure approval and reporting platform.", tags: ["Enterprise", "React", "Node"], href: "#" },
+  { name: "Amico Safetynet", summary: "SaaS for construction health & safety management and compliance tracking.", tags: ["SaaS", "Compliance"], href: "#" },
+  { name: "ConstructR", summary: "Real-time tracking and invoicing solution for construction logistics.", tags: ["Logistics", "Real-time"], href: "#" },
+  { name: "Tasttlig", summary: "Mobile/web app for discovering and booking local festivals and experiences.", tags: ["Mobile", "Web"], href: "#" },
+];
+
+const experience = [
+  {
+    role: "Software Developer", company: "FactR Limited", location: "Paris, Ontario", period: "Sep 2021 – Aug 2024", bullets: [
+      "Increased user satisfaction by 60% by delivering scalable web apps.",
+      "Improved performance metrics by 30% using data-driven insights.",
+      "Achieved ~80% WCAG 2.0 AA accessibility compliance.",
+      "Integrated external cloud platforms to expand functionality.",
+      "Enhanced RESTful services for seamless data integration.",
+      "Provided client IT support via chat and virtual platforms.",
+    ],
+  },
+  {
+    role: "Software Developer", company: "Tasttlig Corporation", location: "Toronto, Ontario", period: "Jan 2021 – Sep 2021", bullets: [
+      "Improved UI responsiveness by ~40% through performance tuning.",
+      "Developed high-performance REST APIs and boosted efficiency.",
+      "Supported Agile delivery and sprint outcomes.",
+    ],
+  },
+  {
+    role: "Software Developer Co-op", company: "Athletics Ontario", location: "Toronto, Ontario", period: "May 2020 – Aug 2020", bullets: [
+      "Built mobile and web apps; improved functionality measurably.",
+      "Reached ~90% unit test coverage with Jest.",
+      "Delivered weekly demos with high stakeholder satisfaction.",
+    ],
+  },
+  {
+    role: "Web Developer", company: "Skylift Wireless", location: "Nigeria", period: "Aug 2017 – Sep 2018", bullets: [
+      "Redesigned corporate website for significant UX uplift.",
+      "Implemented database-backed features for scalability.",
+    ],
+  },
+];
+
+const education = [
+  { title: "Postgraduate Diploma, Information Technology Solutions (Honours)", org: "Humber College", location: "Toronto, ON", period: "Jan 2019 – Aug 2020" },
+  { title: "B.Sc. Computer Science", org: "Houdegbe North American University", location: "Cotonou, Benin", period: "Aug 2011 – Dec 2014" },
+];
+
+const certs = [
+  "Ethics Exam Certificate – CIPS, 2024",
+  "Building Flexible Android Apps with Java – 2020",
+  "Learning ECMAScript 6 – 2020",
+  "Project Management Academy – 2015",
+];
+
+function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <section id={id} className="scroll-mt-24">
+      <motion.h2
+        className="text-2xl md:text-3xl font-semibold tracking-tight mb-4"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+      >
+        {title}
+      </motion.h2>
+      {children}
+    </section>
+  );
+}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+export default function Page() {
+  const [query, setQuery] = useState("");
+
+  const filteredProjects = useMemo(() => {
+    if (!query) return projects;
+    const q = query.toLowerCase();
+    return projects.filter(
+      (p) => p.name.toLowerCase().includes(q) || p.summary.toLowerCase().includes(q) || p.tags.join(" ").toLowerCase().includes(q)
+    );
+  }, [query]);
+
+  return (
+    <div className="min-h-screen">
+      {/* Top Bar */}
+      <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-slate-900/60 border-b border-slate-200/60 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-2xl bg-slate-900 dark:bg-white flex items-center justify-center shadow">
+              <span className="text-white dark:text-slate-900 font-bold">MA</span>
+            </div>
+            <div>
+              <p className="text-sm text-slate-500 dark:text-slate-400">Software Developer</p>
+              <h1 className="text-lg md:text-xl font-semibold">Michael Anetor</h1>
+            </div>
+          </div>
+          <nav className="hidden md:flex gap-6 text-sm">
+            <a href="#about" className="hover:underline">About</a>
+            <a href="#skills" className="hover:underline">Skills</a>
+            <a href="#experience" className="hover:underline">Experience</a>
+            <a href="#projects" className="hover:underline">Projects</a>
+            <a href="#education" className="hover:underline">Education</a>
+            <a href="#contact" className="hover:underline">Contact</a>
+          </nav>
+          <div className="flex items-center gap-2">
+            <Button asChild variant="secondary" className="rounded-2xl">
+              <a href={RESUME_URL} download='Michael_Anetor_Resume.pdf' type="application/pdf">
+                <Download className="w-4 h-4 mr-2" /> Resume
+              </a>
+            </Button>
+            <Button asChild className="rounded-2xl">
+              <a href="mailto:michellanet@gmail.com" target="_blank">
+                <Mail className="w-4 h-4 mr-2" /> Contact
+              </a>
+            </Button>
+          </div>
         </div>
+      </header>
+
+      {/* Hero */}
+      <section className="max-w-6xl mx-auto px-4 pt-10 pb-6">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="grid md:grid-cols-3 gap-6 items-start">
+          <Card className="col-span-2">
+            <CardContent className="p-6">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Builder of scalable web and mobile experiences</h2>
+              <p className="mt-3 text-slate-600 dark:text-slate-300">5+ years delivering production-ready software across Agile teams. Passionate about clean architecture, accessibility, and thoughtful UX.</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {["React", "TypeScript", "Node.js", "PostgreSQL", "React Native", "Tailwind", "Jest"].map((t) => (
+                  <Badge key={t} variant="secondary" className="rounded-xl py-1 px-3">
+                    {t}
+                  </Badge>
+                ))}
+              </div>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button asChild className="rounded-2xl">
+                  <a href="mailto:michellanet@gmail.com">
+                    <Mail className="w-4 h-4 mr-2" />Hire me
+                  </a>
+                </Button>
+                <Button asChild variant="outline" className="rounded-2xl">
+                  <a href="https://github.com/michellanet" target="_blank" rel="noreferrer">
+                    <Github className="w-4 h-4 mr-2" /> GitHub
+                  </a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="font-semibold text-lg">Based in Toronto, ON</h3>
+              <div className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                <p className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4" /> Open to remote or Ontario-based roles
+                </p>
+                <p className="flex items-center gap-2">
+                  <Phone className="w-4 h-4" /> 647-562-3739
+                </p>
+                <p className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" /> michellanet@gmail.com
+                </p>
+                <a className="flex items-center gap-2 hover:underline" href="https://github.com/michellanet" target="_blank" rel="noreferrer">
+                  <LinkIcon className="w-4 h-4" /> github.com/michellanet
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </section>
+
+      <main className="max-w-6xl mx-auto px-4 pb-20 space-y-14">
+        <Section id="about" title="About">
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+            Results-driven Software Developer with a track record of delivering scalable solutions across the full development lifecycle. Comfortable across the stack, experienced in collaborating with cross-functional teams, and committed to accessibility and performance.
+          </p>
+        </Section>
+
+        <Section id="skills" title="Skills">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {Object.entries(skills).map(([group, list]) => (
+              <Card key={group}>
+                <CardContent className="p-5">
+                  <h4 className="font-semibold mb-3">{group}</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {list.map((s) => (
+                      <Badge key={s} variant="outline" className="rounded-xl">
+                        {s}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Section>
+
+        <Section id="experience" title="Experience">
+          <div className="space-y-5">
+            {experience.map((job) => (
+              <Card key={job.company + job.role}>
+                <CardContent className="p-5">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                    <div>
+                      <h4 className="text-lg font-semibold">
+                        {job.role} · {job.company}
+                      </h4>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">{job.location}</p>
+                    </div>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{job.period}</p>
+                  </div>
+                  <ul className="mt-3 list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
+                    {job.bullets.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Section>
+
+        <Section id="projects" title="Projects">
+          <div className="mb-4 flex items-center gap-2">
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search projects or tags"
+              className="w-full md:w-1/2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/70 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-400"
+            />
+            <Badge variant="secondary" className="rounded-xl">{filteredProjects.length} shown</Badge>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredProjects.map((p) => (
+              <motion.div key={p.name} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3 }}>
+                <Card className="group h-full">
+                  <CardContent className="p-5 flex flex-col h-full">
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-lg group-hover:underline flex items-center gap-2">
+                        {p.name} <ArrowUpRight className="w-4 h-4" />
+                      </h4>
+                      <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{p.summary}</p>
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {p.tags.map((t) => (
+                        <Badge key={p.name + t} variant="outline" className="rounded-xl">
+                          {t}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </Section>
+
+        <Section id="education" title="Education">
+          <div className="grid md:grid-cols-2 gap-4">
+            {education.map((e) => (
+              <Card key={e.title}>
+                <CardContent className="p-5">
+                  <h4 className="font-semibold">{e.title}</h4>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                    {e.org} · {e.location}
+                  </p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">{e.period}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Section>
+
+        <Section id="contact" title="Contact">
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                  <h4 className="font-semibold text-lg">Let’s build something great</h4>
+                  <p className="text-slate-600 dark:text-slate-300">Open to remote or Ontario-based roles. Available for contract or full-time.</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button asChild className="rounded-2xl">
+                    <a href="mailto:michellanet@gmail.com" target="_blank">
+                      <Mail className="w-4 h-4 mr-2" />Email
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline" className="rounded-2xl">
+                    <a href="tel:+16475623739">
+                      <Phone className="w-4 h-4 mr-2" />Call
+                    </a>
+                  </Button>
+                  <Button asChild variant="secondary" className="rounded-2xl">
+                    <a href="https://github.com/michellanet" target="_blank" rel="noreferrer">
+                      <Github className="w-4 h-4 mr-2" />GitHub
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 py-6 text-sm text-slate-500 dark:text-slate-400">© {new Date().getFullYear()} Michael Anetor. All rights reserved.</div>
       </footer>
     </div>
   );

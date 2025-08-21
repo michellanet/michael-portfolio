@@ -10,19 +10,20 @@ import { Badge } from "@/components/ui/badge";
 const RESUME_URL = "/Michael-Resume.pdf"; // place file in /public
 
 const skills: Record<string, string[]> = {
-  Frontend: ["JavaScript (ES6+)", "TypeScript", "React", "React Native", "Redux", "HTML5", "CSS3", "Tailwind CSS", "Expo", "Jest", "RTL"],
+  Frontend: ["JavaScript (ES6+)", "TypeScript", "React", "React Native", "Redux", "HTML5", "CSS3", "SCSS", "Tailwind CSS", "Next.js", "Expo", "Jest"],
   Backend: ["Node.js", "Express", "GraphQL", "ASP.NET Core", "Java EE"],
-  Database: ["PostgreSQL", "MongoDB", "MSSQL"],
-  Tools: ["Git", "AWS", "Jira", "SourceTree", "ESLint", "Figma"],
+  Database: ["PostgreSQL", "MongoDB", "SQL Server"],
+  Tools: ["Git", "AWS", "Jira", "SourceTree", "Figma"],
 };
 
 const projects = [
-  { name: "DataPeak AI", summary: "SaaS tool that transforms data into clear insights with streamlined dashboards and sharing.", tags: ["SaaS", "Data", "React", "Node"], href: "#" },
-  { name: "Linkify AI", summary: "Automated LinkedIn lead-generation system with scheduling and analytics.", tags: ["Automation", "React", "Node"], href: "#" },
-  { name: "Enovis CapEx", summary: "Multilingual capital expenditure approval and reporting platform.", tags: ["Enterprise", "React", "Node"], href: "#" },
-  { name: "Amico Safetynet", summary: "SaaS for construction health & safety management and compliance tracking.", tags: ["SaaS", "Compliance"], href: "#" },
-  { name: "ConstructR", summary: "Real-time tracking and invoicing solution for construction logistics.", tags: ["Logistics", "Real-time"], href: "#" },
-  { name: "Tasttlig", summary: "Mobile/web app for discovering and booking local festivals and experiences.", tags: ["Mobile", "Web"], href: "#" },
+  { name: "DataPeak AI", summary: "A cutting-edge automated SaaS solution for transforming data into simplified information and insights.", tags: ["React", "Node.js", "Flask(Python)", "Openai", "Postgres", "AWS", "Stripe Payment"], href: "https://www.factr.me/datapeak" },
+  { name: "Linkify AI", summary: "Automated LinkedIn lead-generation system with scheduling, analytics and reporting for marketing campaigns.", tags: ["PhantomBuster Automation", "React", "Node.js", "Chat-GPT", "Postgres", "AWS", "Stripe Payment"], href: "https://www.factr.me/" },
+  { name: "Enovis CapEx Workflow", summary: "Multilingual solution for tracking and reporting of capital expenditure evaluation and approvals, as well as presence declarations between medical practitioners.", tags: ["React", "Node.js", "Postgres", "AWS"], href: "https://enovis.com/" },
+  { name: "Amico Safetynet", summary: "SaaS for construction, health & safety management and compliance tracking.", tags: ["React", "Node.js", "Postgres", "AWS"], href: "https://amico.build/health-safety/" },
+  { name: "ConstructR", summary: "Real-time tracking and invoicing solution for construction logistics.", tags: ["React", "Node.js", "Typescript", "Postgres", "GraphQL", "AWS", "Google maps & geofencing"], href: "#" },
+  { name: "Tasttlig", summary: "Mobile/web app for discovering and booking local festivals and experiences.", tags: ["React", "Node.js", "Postgres", "React Native", "Expo", "AWS", "Stripe Payment"], href: "https://tasttlig.com/" },
+  { name: "Athletics Ontario", summary: "A web and mobile application that provides real-time performance analytics for athletes through their reported results on events", tags: ["React", "SQL Server", "React Native", "Wordpress", "Firebase Cloud", "Laravel(PHP)", "Google Cloud VM"], href: "https://athleticsontario.ca/" },
 ];
 
 const experience = [
@@ -30,7 +31,7 @@ const experience = [
     role: "Software Developer", company: "FactR Limited", location: "Paris, Ontario", period: "Sep 2021 – Aug 2024", bullets: [
       "Increased user satisfaction by 60% by delivering scalable web apps.",
       "Improved performance metrics by 30% using data-driven insights.",
-      "Achieved ~80% WCAG 2.0 AA accessibility compliance.",
+      "Achieved 80% WCAG 2.0 AA accessibility compliance.",
       "Integrated external cloud platforms to expand functionality.",
       "Enhanced RESTful services for seamless data integration.",
       "Provided client IT support via chat and virtual platforms.",
@@ -38,7 +39,7 @@ const experience = [
   },
   {
     role: "Software Developer", company: "Tasttlig Corporation", location: "Toronto, Ontario", period: "Jan 2021 – Sep 2021", bullets: [
-      "Improved UI responsiveness by ~40% through performance tuning.",
+      "Improved UI responsiveness by 40% through performance tuning.",
       "Developed high-performance REST APIs and boosted efficiency.",
       "Supported Agile delivery and sprint outcomes.",
     ],
@@ -46,7 +47,7 @@ const experience = [
   {
     role: "Software Developer Co-op", company: "Athletics Ontario", location: "Toronto, Ontario", period: "May 2020 – Aug 2020", bullets: [
       "Built mobile and web apps; improved functionality measurably.",
-      "Reached ~90% unit test coverage with Jest.",
+      "Reached 90% unit test coverage with Jest.",
       "Delivered weekly demos with high stakeholder satisfaction.",
     ],
   },
@@ -60,7 +61,7 @@ const experience = [
 
 const education = [
   { title: "Postgraduate Diploma, Information Technology Solutions (Honours)", org: "Humber College", location: "Toronto, ON", period: "Jan 2019 – Aug 2020" },
-  { title: "B.Sc. Computer Science", org: "Houdegbe North American University", location: "Cotonou, Benin", period: "Aug 2011 – Dec 2014" },
+  { title: "B.Sc. Computer Science", org: "Houdegbe North American University", location: "Porto-Novo, Benin", period: "Aug 2011 – Dec 2014" },
 ];
 
 const certs = [
@@ -105,7 +106,7 @@ export default function Page() {
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-2xl bg-slate-900 dark:bg-white flex items-center justify-center shadow">
-              <span className="text-white dark:text-slate-900 font-bold">MA</span>
+              <img src="/favicon-32x32.png" alt="Profile Picture" className="w-full h-full object-cover rounded-2xl" />
             </div>
             <div>
               <p className="text-sm text-slate-500 dark:text-slate-400">Software Developer</p>
@@ -141,9 +142,9 @@ export default function Page() {
           <Card className="col-span-2">
             <CardContent className="p-6">
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Builder of scalable web and mobile experiences</h2>
-              <p className="mt-3 text-slate-600 dark:text-slate-300">5+ years delivering production-ready software across Agile teams. Passionate about clean architecture, accessibility, and thoughtful UX.</p>
+              <p className="mt-3 text-slate-600 dark:text-slate-300">4+ years delivering production-ready software across Agile teams. Passionate about clean architecture, accessibility, and thoughtful UX.</p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {["React", "TypeScript", "Node.js", "PostgreSQL", "React Native", "Tailwind", "Jest"].map((t) => (
+                {["React", "TypeScript", "Node.js", "Javascript", "PostgreSQL", "GraphQL", "React Native", "MongoDB", "Flask(Python)", "Tailwind", "Jest", "ASP.Net"].map((t) => (
                   <Badge key={t} variant="secondary" className="rounded-xl py-1 px-3">
                     {t}
                   </Badge>
@@ -253,7 +254,9 @@ export default function Page() {
                 <Card className="group h-full">
                   <CardContent className="p-5 flex flex-col h-full">
                     <div className="flex-1">
-                      <h4 className="font-semibold text-lg group-hover:underline flex items-center gap-2">
+                      <h4 className="font-semibold text-lg group-hover:underline flex items-center gap-2"
+                        onClick={() => window.open(p.href, '_blank')}>
+
                         {p.name} <ArrowUpRight className="w-4 h-4" />
                       </h4>
                       <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{p.summary}</p>

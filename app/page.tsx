@@ -10,9 +10,9 @@ import { Badge } from "@/components/ui/badge";
 const RESUME_URL = "/Michael-Resume.pdf"; // place file in /public
 
 const skills: Record<string, string[]> = {
-  Frontend: ["JavaScript (ES6+)", "TypeScript", "React", "React Native", "Redux", "HTML5", "CSS3", "SCSS", "Tailwind CSS", "Next.js", "Expo", "Jest"],
-  Backend: ["Node.js", "Express", "GraphQL", "ASP.NET Core", "Java EE"],
-  Database: ["PostgreSQL", "MongoDB", "SQL Server"],
+  Frontend: ["JavaScript", "TypeScript", "React", "React Native", "Redux", "HTML5", "CSS3", "SCSS", "Tailwind CSS", "Next.js", "Expo", "Jest"],
+  Backend: ["Node.js", "GraphQL", "ASP.NET Core", "Flask(Python)"],
+  Database: ["PostgreSQL", "MongoDB", "Microsoft SQL Server"],
   Tools: ["Git", "AWS", "Jira", "SourceTree", "Figma"],
 };
 
@@ -23,7 +23,7 @@ const projects = [
   { name: "Amico Safetynet", summary: "SaaS for construction, health & safety management and compliance tracking.", tags: ["React", "Node.js", "Postgres", "AWS"], href: "https://amico.build/health-safety/" },
   { name: "ConstructR", summary: "Real-time tracking and invoicing solution for construction logistics.", tags: ["React", "Node.js", "Typescript", "Postgres", "GraphQL", "AWS", "Google maps & geofencing"], href: "#" },
   { name: "Tasttlig", summary: "Mobile/web app for discovering and booking local festivals and experiences.", tags: ["React", "Node.js", "Postgres", "React Native", "Expo", "AWS", "Stripe Payment"], href: "https://tasttlig.com/" },
-  { name: "Athletics Ontario", summary: "A web and mobile application that provides real-time performance analytics for athletes through their reported results on events", tags: ["React", "SQL Server", "React Native", "Wordpress", "Firebase Cloud", "Laravel(PHP)", "Google Cloud VM"], href: "https://athleticsontario.ca/" },
+  { name: "Athletics Ontario", summary: "A web and mobile application that provides real-time performance analytics for athletes through their reported results on events", tags: ["React", "Microsoft SQL Server", "React Native", "Wordpress", "Firebase Cloud", "Laravel(PHP)", "Google Cloud VM"], href: "https://athleticsontario.ca/" },
 ];
 
 const experience = [

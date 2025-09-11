@@ -2,10 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github, Mail, MapPin, Phone, Download, Link as LinkIcon } from "lucide-react";
+import { ArrowUpRight, Github, Mail, MapPin, Phone, Download, Link as LinkIcon, Linkedin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const RESUME_URL = "/Michael-Resume.pdf"; // place file in /public
 
@@ -17,13 +18,55 @@ const skills: Record<string, string[]> = {
 };
 
 const projects = [
-  { name: "DataPeak AI", summary: "A cutting-edge automated SaaS solution for transforming data into simplified information and insights.", tags: ["React", "Node.js", "Flask(Python)", "Openai", "Postgres", "AWS", "Stripe Payment"], href: "https://www.factr.me/datapeak" },
-  { name: "Linkify AI", summary: "Automated LinkedIn lead-generation system with scheduling, analytics and reporting for marketing campaigns.", tags: ["PhantomBuster Automation", "React", "Node.js", "Chat-GPT", "Postgres", "AWS", "Stripe Payment"], href: "https://www.factr.me/" },
-  { name: "Enovis CapEx Workflow", summary: "Multilingual solution for tracking and reporting of capital expenditure evaluation and approvals, as well as presence declarations between medical practitioners.", tags: ["React", "Node.js", "Postgres", "AWS"], href: "https://enovis.com/" },
-  { name: "Amico Safetynet", summary: "SaaS for construction, health & safety management and compliance tracking.", tags: ["React", "Node.js", "Postgres", "AWS"], href: "https://amico.build/health-safety/" },
-  { name: "ConstructR", summary: "Real-time tracking and invoicing solution for construction logistics.", tags: ["React", "Node.js", "Typescript", "Postgres", "GraphQL", "AWS", "Google maps & geofencing"], href: "#" },
-  { name: "Tasttlig", summary: "Mobile/web app for discovering and booking local festivals and experiences.", tags: ["React", "Node.js", "Postgres", "React Native", "Expo", "AWS", "Stripe Payment"], href: "https://tasttlig.com/" },
-  { name: "Athletics Ontario", summary: "A web and mobile application that provides real-time performance analytics for athletes through their reported results on events", tags: ["React", "Microsoft SQL Server", "React Native", "Wordpress", "Firebase Cloud", "Laravel(PHP)", "Google Cloud VM"], href: "https://athleticsontario.ca/" },
+  {
+    name: "DataPeak AI",
+    summary: "A cutting-edge automated SaaS solution for transforming data into simplified information and insights.",
+    tags: ["React", "Node.js", "Flask(Python)", "Openai", "Postgres", "AWS", "Stripe Payment"],
+    href: "https://www.factr.me/datapeak",
+    image: "/project-images/datapeak.png",
+  },
+  {
+    name: "Linkify AI",
+    summary: "Automated LinkedIn lead-generation system with scheduling, analytics and reporting for marketing campaigns.",
+    tags: ["PhantomBuster Automation", "React", "Node.js", "Chat-GPT", "Postgres", "AWS", "Stripe Payment"],
+    href: "https://www.factr.me/",
+    image: "/project-images/linkify.png",
+  },
+  {
+    name: "Enovis CapEx Workflow",
+    summary: "Multilingual solution for tracking and reporting of capital expenditure evaluation and approvals, as well as presence declarations between medical practitioners.",
+    tags: ["React", "Node.js", "Postgres", "AWS"],
+    href: "https://enovis.com/",
+    image: "/project-images/enovis.png",
+  },
+  {
+    name: "Amico Safetynet",
+    summary: "SaaS for construction, health & safety management and compliance tracking.",
+    tags: ["React", "Node.js", "Postgres", "AWS"],
+    href: "https://amico.build/health-safety/",
+    image: "/project-images/amico.png",
+  },
+  {
+    name: "ConstructR",
+    summary: "Real-time tracking and invoicing solution for construction logistics.",
+    tags: ["React", "Node.js", "Typescript", "Postgres", "GraphQL", "AWS", "Google maps & geofencing"],
+    href: "#",
+    image: "/project-images/constructr.png",
+  },
+  {
+    name: "Tasttlig",
+    summary: "Mobile/web app for discovering and booking local festivals and experiences.",
+    tags: ["React", "Node.js", "Postgres", "React Native", "Expo", "AWS", "Stripe Payment"],
+    href: "https://tasttlig.com/",
+    image: "/project-images/tasttlig.png",
+  },
+  {
+    name: "Athletics Ontario",
+    summary: "A web and mobile application that provides real-time performance analytics for athletes through their reported results on events",
+    tags: ["React", "Microsoft SQL Server", "React Native", "Wordpress", "Firebase Cloud", "Laravel(PHP)", "Google Cloud VM"],
+    href: "https://athleticsontario.ca/",
+    image: "/project-images/athletics.png",
+  },
 ];
 
 const experience = [
@@ -90,6 +133,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 
 export default function Page() {
   const [query, setQuery] = useState("");
+  const [selectedProject, setSelectedProject] = useState<any | null>(null);
 
   const filteredProjects = useMemo(() => {
     if (!query) return projects;
@@ -132,6 +176,9 @@ export default function Page() {
                 <Mail className="w-4 h-4 mr-2" /> Contact
               </a>
             </Button>
+            <div className="flex justify-end p-4">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
@@ -144,7 +191,7 @@ export default function Page() {
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Builder of scalable web and mobile experiences</h2>
               <p className="mt-3 text-slate-600 dark:text-slate-300">4+ years delivering production-ready software across Agile teams. Passionate about clean architecture, accessibility, and thoughtful UX.</p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {["React", "TypeScript", "Node.js", "Javascript", "PostgreSQL", "GraphQL", "React Native", "MongoDB", "Flask(Python)", "Tailwind", "Jest", "ASP.Net"].map((t) => (
+                {["React", "TypeScript", "Node.js", "Javascript", "PostgreSQL", "GraphQL", "React Native", "MongoDB", "Flask(Python)", "Tailwind", "Jest", "ASP.Net Core"].map((t) => (
                   <Badge key={t} variant="secondary" className="rounded-xl py-1 px-3">
                     {t}
                   </Badge>
@@ -179,7 +226,10 @@ export default function Page() {
                   <Mail className="w-4 h-4" /> michellanet@gmail.com
                 </p>
                 <a className="flex items-center gap-2 hover:underline" href="https://github.com/michellanet" target="_blank" rel="noreferrer">
-                  <LinkIcon className="w-4 h-4" /> github.com/michellanet
+                  <Github className="w-4 h-4" /> github.com/michellanet
+                </a>
+                <a className="flex items-center gap-2 hover:underline" href="https://www.linkedin.com/in/michael-anetor-72461a82/" target="_blank" rel="noreferrer">
+                  <Linkedin className="w-4 h-4" /> linkedin.com/in/michael-anetor-72461a82/
                 </a>
               </div>
             </CardContent>
@@ -244,35 +294,92 @@ export default function Page() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search projects or tags"
-              className="w-full md:w-1/2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/70 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-400"
+              className="w-full md:w-1/2 rounded-xl border border-slate-300 dark:border-slate-700 
+                 bg-white/70 dark:bg-slate-900/70 px-4 py-2 focus:outline-none 
+                 focus:ring-2 focus:ring-slate-400"
             />
-            <Badge variant="secondary" className="rounded-xl">{filteredProjects.length} shown</Badge>
+            <Badge variant="secondary" className="rounded-xl">
+              {filteredProjects.length} shown
+            </Badge>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredProjects.map((p) => (
-              <motion.div key={p.name} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3 }}>
-                <Card className="group h-full">
-                  <CardContent className="p-5 flex flex-col h-full">
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-lg group-hover:underline flex items-center gap-2"
-                        onClick={() => window.open(p.href, '_blank')}>
 
-                        {p.name} <ArrowUpRight className="w-4 h-4" />
-                      </h4>
-                      <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{p.summary}</p>
-                    </div>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {p.tags.map((t) => (
-                        <Badge key={p.name + t} variant="outline" className="rounded-xl">
-                          {t}
-                        </Badge>
-                      ))}
-                    </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((p) => (
+              <motion.div
+                key={p.name}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="group h-full overflow-hidden">
+                  <div
+                    className="relative w-full h-40 md:h-48 overflow-hidden cursor-pointer"
+                    onClick={() => setSelectedProject(p)}
+                  >
+                    <img
+                      src={p.image || "/placeholder.png"}
+                      alt={p.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+
+
+                  <CardContent className="p-5 flex flex-col">
+                    <h4 className="font-semibold text-lg group-hover:underline flex items-center gap-2">
+                      {p.name} <ArrowUpRight className="w-4 h-4" />
+                    </h4>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                      {p.summary}
+                    </p>
+                    {p.tags && p.tags.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {p.tags.map((t: string) => (
+                          <Badge key={p.name + t} variant="outline" className="rounded-xl">
+                            {t}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </motion.div>
             ))}
           </div>
+          {selectedProject && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full mx-4 overflow-hidden shadow-xl">
+                <img
+                  src={selectedProject.image || "/placeholder-project.png"}
+                  alt={selectedProject.name}
+                  className="w-full h-64 object-cover"
+                />
+
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">{selectedProject.name}</h3>
+                  <p className="text-slate-600 dark:text-slate-300">
+                    {selectedProject.summary}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {selectedProject.tags.map((t: string) => (
+                      <Badge key={t} variant="outline" className="rounded-xl">
+                        {t}
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="mt-6 flex justify-end">
+                    <Button
+                      variant="secondary"
+                      onClick={() => setSelectedProject(null)}
+                    >
+                      Close
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
         </Section>
 
         <Section id="education" title="Education">
@@ -308,6 +415,11 @@ export default function Page() {
                   <Button asChild variant="outline" className="rounded-2xl">
                     <a href="tel:+16475623739">
                       <Phone className="w-4 h-4 mr-2" />Call
+                    </a>
+                  </Button>
+                  <Button asChild variant="secondary" className="rounded-2xl">
+                    <a href="https://www.linkedin.com/in/michael-anetor-72461a82/" target="_blank" rel="noreferrer">
+                      <Linkedin className="w-4 h-4 mr-2" />Linkedin
                     </a>
                   </Button>
                   <Button asChild variant="secondary" className="rounded-2xl">
